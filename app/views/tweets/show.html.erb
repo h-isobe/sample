@@ -1,0 +1,55 @@
+<h1>投稿詳細</h1>
+
+<table>
+  <tr>
+    <td><%= attachment_image_tag @tweet, :image, :fill, 100, 100, format: 'jpeg' %></td>
+  </tr>
+  <tr>
+    <td><%= @tweet.title %></td>
+  </tr>
+  <tr>
+    <td><%= @tweet.body %></td>
+  </tr>
+  <tr>
+    <td><%= @tweet.created_at.strftime('%y/%m/%d') %></td>
+  </tr>
+</table>
+
+<% if @tweet.user_id == current_user.id %>
+<%= link_to "編集", edit_tweet_path %>
+<%= link_to "削除", tweet_path, method: :delete %>
+<% end %>
+
+<ul>
+  <li>
+    <%= @tweet.post_comments.count  %>
+  </li>
+</ul>
+
+<p class="commnet-count"><%= @tweet.post_comments.count %>件コメント</p> 
+
+
+
+
+
+<% @tweet.post_comments.each do |post_comment| %>
+
+<%= post_comment.user.name %>
+
+<%= post_comment.comment %>
+
+<%= post_comment.created_at.strftime('%Y/%m/%d') %>
+
+<% end %>
+
+
+
+<%= form_for [@tweet, @post_comment] do |f| %>
+
+<%= f.text_area :comment, placeholder: "コメントをここに" %><br>
+<%= f.submit "送信" %>
+
+<% end %>
+
+
+
