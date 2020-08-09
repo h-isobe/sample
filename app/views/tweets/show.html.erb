@@ -40,8 +40,10 @@
 
 <%= post_comment.created_at.strftime('%Y/%m/%d') %>
 
+<% if post_comment.user == current_user %>
+<%= link_to "削除", tweet_post_comment_path(post_comment.tweet, post_comment), method: :delete, data: {confirm: "本当に削除しますか？"} %>
 <% end %>
-
+<% end %>
 
 
 <%= form_for [@tweet, @post_comment] do |f| %>
