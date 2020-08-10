@@ -1,0 +1,29 @@
+
+
+<%= @tweets.each do |tweet| %>
+
+<table>
+  <tbody>
+  <tr>
+    <td><%= attachment_image_tag tweet, :image, :fill, 100, 100, format: 'jpeg' %></td>
+  </tr>
+  <tr>
+    <td>
+      title:
+      <%= link_to tweet_path(tweet.id) do %> 
+        <%= tweet.title %>
+      <% end %>  
+    </td>
+  </tr>
+  <tr>
+    <td>本文: <%= tweet.body %></td>
+  </tr>
+  <tr>
+    <td><%= tweet.created_at.strftime('%y/%m/%d') %></td>
+  </tr>
+  <tr>
+    <td><%= link_to "#{tweet.post_comments.count}コメント", tweet_path(tweet.id) %></td>
+  </tr>
+  </tbody>
+</table>
+<% end %>

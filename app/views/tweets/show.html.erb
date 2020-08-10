@@ -15,9 +15,19 @@
   </tr>
 </table>
 
-<% if @tweet.user_id == current_user.id %>
-<%= link_to "編集", edit_tweet_path %>
-<%= link_to "削除", tweet_path, method: :delete %>
+<% if @tweet.user == current_user %>
+  <%= link_to "編集", edit_tweet_path %>
+  <%= link_to "削除", tweet_path(@tweet), method: :delete %>
+<% end %>
+
+<% if @tweet.favorited_by?(current_user) %>
+  <%= link_to tweet_favorites_path(@tweet), method: :delete do %>
+    <%= @tweet.favorites.count %> いいね
+  <% end %>
+<% else %>
+  <%= link_to tweet_favorites_path(@tweet), method: :post do %>
+    <%= @tweet.favorites.count %> いいね
+  <% end %>
 <% end %>
 
 <ul>
