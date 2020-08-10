@@ -1,5 +1,13 @@
 
 
+<h4>プロフィール画像:</h4> 
+<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
+<h4>名前: <%= @user.name %></h4>
+
+<% if @user.id == current_user.id %>
+  <%= link_to "編集", edit_user_path(@user) %>
+<% end %>
+
 <%= @tweets.each do |tweet| %>
 
 <table>

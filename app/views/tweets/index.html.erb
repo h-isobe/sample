@@ -1,9 +1,12 @@
-<h1>投稿一覧</h1>
+<h1>投稿一覧</h1><br>
 
 <%= @tweets.each do |tweet| %>
 
 <table>
   <tbody>
+  <tr>
+    <td><%= attachment_image_tag tweet.user, :profile_image, :fill, 20, 20, format: 'jpeg' %></td>
+  </tr>
   <tr>
     <td><%= attachment_image_tag tweet, :image, :fill, 100, 100, format: 'jpeg' %></td>
   </tr>
@@ -22,7 +25,12 @@
     <td><%= tweet.created_at.strftime('%y/%m/%d') %></td>
   </tr>
   <tr>
-    <td><%= link_to "#{tweet.post_comments.count}コメント", tweet_path(tweet.id) %></td>
+    <td><%= link_to "#{tweet.favorites.count}いいね", tweet_path(tweet.id) %>
+    |
+    <%= link_to "#{tweet.post_comments.count}コメント", tweet_path(tweet.id) %></td>
+  </tr>
+  <tr>
+    <td>==========</td>
   </tr>
   </tbody>
 </table>

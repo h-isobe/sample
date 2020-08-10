@@ -2,7 +2,10 @@
 
 <table>
   <tr>
-    <td><%= attachment_image_tag @tweet, :image, :fill, 100, 100, format: 'jpeg' %></td>
+    <td><%= attachment_image_tag @tweet.user, :profile_image, :fill, 20, 20, format: 'jpeg', fallback: "no_image,id" %></td>
+  </tr>
+  <tr>
+    <td><%= attachment_image_tag @tweet, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></td>
   </tr>
   <tr>
     <td><%= @tweet.title %></td>
@@ -17,7 +20,7 @@
 
 <% if @tweet.user == current_user %>
   <%= link_to "編集", edit_tweet_path %>
-  <%= link_to "削除", tweet_path(@tweet), method: :delete %>
+  <%= link_to "削除", tweet_path(@tweet), method: :delete, data: {confirm: "本当に削除しますか？"} %>
 <% end %>
 
 <% if @tweet.favorited_by?(current_user) %>
